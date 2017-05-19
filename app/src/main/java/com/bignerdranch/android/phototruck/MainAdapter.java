@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bignerdranch.android.phototruck.utility.FontsFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +19,10 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
 
 
     private List<String> categoryList;
-    public MainAdapter(List<String> categoryList) {
+    Context mContext;
+    public MainAdapter(Context c, List<String> categoryList) {
         this.categoryList = categoryList;
+        this.mContext = c;
     }
     @Override
     public MainAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -45,6 +49,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
             mTitle = (TextView) itemView.findViewById(R.id.title);
+            mTitle.setTypeface(FontsFactory.fontBold(mContext));
         }
     }
 }

@@ -15,8 +15,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/recycler_view"
         android:paddingTop="5dp"
-
-
         android:clipToPadding="true"
        >
 

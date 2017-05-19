@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView myList = (RecyclerView) findViewById(R.id.recycler_view);
         myList.setLayoutManager(mLayoutManager);
-        mAdapter = new MainAdapter(categoryList);
+        mAdapter = new MainAdapter(this, categoryList);
         mRecyclerView.setAdapter(mAdapter);
     }
     @Override
