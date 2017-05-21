@@ -4,12 +4,13 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@drawable/catrgory_backgrounnd"
     android:gravity="center_vertical|center_horizontal"
+    android:background="@drawable/catrgory_backgrounnd"
     android:layout_marginLeft="4dp"
     >
     <TextView
         android:id="@+id/title"
+        android:paddingBottom="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:divider="@drawable/divider"

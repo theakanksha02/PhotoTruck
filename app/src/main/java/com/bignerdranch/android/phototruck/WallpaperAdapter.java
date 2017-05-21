@@ -38,7 +38,7 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Recy
 
     @Override
     public WallpaperAdapter.RecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.wallpaper_row,parent,false);
+        View view = LayoutInflater.from(c).inflate(R.layout.wallpaper_row,parent,false);
         RecyclerViewHolder recyclerViewHolder = new RecyclerViewHolder(view);
 
         return recyclerViewHolder;

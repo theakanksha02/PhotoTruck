@@ -3,15 +3,14 @@ package com.bignerdranch.android.phototruck;
 import android.app.WallpaperManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,17 +18,19 @@ import com.bignerdranch.android.phototruck.utility.ItemClickSupport;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
-    private RecyclerView mRecyclerView;
+    private RecyclerView rvGrid,rvCategory;
     private RecyclerView.LayoutManager mLayoutManager;
     private MainAdapter mAdapter;
     private WallpaperAdapter adapter;
+    TextView tvRandom ;
     private RecyclerView.LayoutManager layoutManager;
+
+    ArrayList<String> mCategoryList;
 
 
 
@@ -40,17 +41,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+        Log.d("bla-blah", "this is just a log");
+        rvGrid = (RecyclerView) findViewById(R.id.rv_grid);
+        rvCategory = (RecyclerView) findViewById(R.id.rv_category);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        ArrayList<String> categoryList =new ArrayList<String>();
-        categoryList.add("Nature");
-        categoryList.add("Abstract");
-        categoryList.add("Spiritual");
-        categoryList.add("Cartoons");
-        categoryList.add("Gadgets");
+        mCategoryList = new ArrayList<String>();
+        mCategoryList.add("Nature");
+        mCategoryList.add("Abstract");
+        mCategoryList.add("Spiritual");
+        mCategoryList.add("Cartoons");
+        mCategoryList.add("Gadgets");
 
 
         final List<Integer> wallList = new ArrayList<>();
@@ -69,18 +70,31 @@ public class MainActivity extends AppCompatActivity {
         wallList.add(R.drawable.wall16);
         wallList.add(R.drawable.wall17);
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new MainAdapter(this, categoryList);
-        mRecyclerView.setAdapter(mAdapter);
+
 
         adapter = new WallpaperAdapter(wallList, this);
         layoutManager = new GridLayoutManager(MainActivity.this, 2);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(adapter);
+        rvGrid.setLayoutManager(layoutManager);
+        rvGrid.setAdapter(adapter);
+        rvGrid.setHasFixedSize(true);
+
+        // for category
+        rvCategory.setAdapter(new MainAdapter(this, mCategoryList));
+        rvCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        ItemClickSupport.addTo(rvCategory).setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
+            @Override
+            public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+                Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+                List<Integer> wallpaperList = getWallpaperList(mCategoryList.get(position));
+                // TODO: 5/21/2017 set this wallpaperList to the rvGrid  
+            }
+        });
 
 
-        ItemClickSupport.addTo(mRecyclerView).setOnItemClickListener(
+
+
+        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        ItemClickSupport.addTo(rvGrid).setOnItemClickListener(
                 new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
@@ -114,6 +128,28 @@ public class MainActivity extends AppCompatActivity {
         {
             e.printStackTrace();
         }
+    }
+
+
+    /**
+     * this method will retun wallpaper list based on
+     * category selected.
+     * */
+    public List<Integer> getWallpaperList(String category){
+        if (category.equalsIgnoreCase("spiritual")){
+            // TODO: 5/21/2017 make a list of wallpaper based on category and return 
+            final List<Integer> wallList = new ArrayList<>();
+            wallList.add(R.drawable.wall1);
+            wallList.add(R.drawable.wall2);
+            wallList.add(R.drawable.wall3);
+            wallList.add(R.drawable.wall4);
+            wallList.add(R.drawable.wall7);
+            return  wallList;
+        } else if(category.equalsIgnoreCase("nature")){
+            return null;
+        }
+
+        return null;
     }
 
 }
