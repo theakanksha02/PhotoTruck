@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_SHORT).show();
 
-                List<Integer> wallpaperList = getWallpaperList(mCategoryList.get(position));
+                List<Integer> mCurrentWallpaperList = getWallpaperList(mCategoryList.get(position));
                 // here i have change
 
 
