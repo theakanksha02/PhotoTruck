@@ -2,19 +2,25 @@
 package com.bignerdranch.android.phototruck;
 
 import android.app.WallpaperManager;
+import android.content.ClipData;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import com.bignerdranch.android.phototruck.utility.ItemClickSupport;
 
 import java.io.IOException;
@@ -29,7 +35,9 @@ public class MainActivity extends AppCompatActivity {
     private MainAdapter mAdapter;
     private WallpaperAdapter adapter;
     TextView tvRandom ;
-    private RecyclerView.LayoutManager layoutManager;
+    ImageView img;
+
+    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
 
     ArrayList<String> mCategoryList;
     List<Integer> mCurrentWallpaperList;
@@ -43,7 +51,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+
+
         Log.d("bla-blah", "this is just a log");
+        img=(ImageView) findViewById(R.id.iv_wallpaper);
+
         rvGrid = (RecyclerView) findViewById(R.id.rv_grid);
         rvCategory = (RecyclerView) findViewById(R.id.rv_category);
 
@@ -67,15 +79,16 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                 Toast.makeText(MainActivity.this, "" + position, Toast.LENGTH_SHORT).show();
 
-                List<Integer> mCurrentWallpaperList = getWallpaperList(mCategoryList.get(position));
+                mCurrentWallpaperList = getWallpaperList(mCategoryList.get(position));
                 // here i have change
 
 
                 adapter = new WallpaperAdapter(mCurrentWallpaperList,MainActivity.this);
-                layoutManager = new GridLayoutManager(MainActivity.this, 2);
-                rvGrid.setLayoutManager(layoutManager);
+                mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+
+                rvGrid.setLayoutManager(mStaggeredGridLayoutManager);
                 rvGrid.setAdapter(adapter);
-                rvGrid.setHasFixedSize(true);
+                rvGrid.setHasFixedSize(false);
 
 
             }
@@ -110,12 +123,40 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int res_id= item.getItemId();
+        if(res_id==R.id.action_about)
+        {
+            FragmentManager fm = getSupportFragmentManager();
+            MyDialogFragment dialogFragment = new MyDialogFragment ();
+            dialogFragment.show(fm, "Sample Fragment");
+
+        }
+
+
+        return true;
+    }
+
     void setThisAsWallpaper(int imageResource){
         WallpaperManager wallmgr= WallpaperManager.getInstance(getApplicationContext());
         try
         {
             wallmgr.setResource(imageResource);
-            Toast.makeText(MainActivity.this, "Yolo, Your wallpaper updated", Toast.LENGTH_SHORT).show();
+
+            Snackbar bar =  Snackbar.make(findViewById(android.R.id.content), "Wallpaper Updated", Snackbar.LENGTH_LONG)
+                    .setAction("DISMISS", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            // Handle user action
+                        }
+                    });
+            bar.setActionTextColor(Color.RED);
+            View snackbarView = bar.getView();
+            snackbarView.setBackgroundColor(Color.DKGRAY);
+            TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+            textView.setTextColor(Color.YELLOW);
+                   bar.show();
         }
         catch(IOException e)
         {
