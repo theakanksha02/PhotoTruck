@@ -17,13 +17,14 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="This is an amazing wallpaper app where you can find best HD background for your smartphone."
-        android:textSize="20dp" />
+        android:text="This is an amazing wallpaper app where you can find best HD background for your smartphone. Developed by theakankshaa@gmail.com"
+
+        android:textSize="15dp" />
 
     <Button
         android:id="@+id/dismiss"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Dismiss" />
+        android:text="Ok" />
 </LinearLayout>
