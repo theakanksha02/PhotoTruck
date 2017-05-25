@@ -49,8 +49,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
+
 
 
         Log.d("bla-blah", "this is just a log");
@@ -123,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int res_id= item.getItemId();
@@ -137,6 +141,8 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
+
+
 
     void setThisAsWallpaper(int imageResource){
         WallpaperManager wallmgr= WallpaperManager.getInstance(getApplicationContext());
