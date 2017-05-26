@@ -189,6 +189,10 @@ public class MainActivity extends AppCompatActivity {
             wallList.add(R.drawable.wall8);
             wallList.add(R.drawable.wall9);
             wallList.add(R.drawable.wall10);
+            wallList.add(R.drawable.wall55);
+            wallList.add(R.drawable.wall56);
+            wallList.add(R.drawable.wall57);
+            wallList.add(R.drawable.wall58);
 
             return  wallList;
         } else if(category.equalsIgnoreCase("Abstract")){
