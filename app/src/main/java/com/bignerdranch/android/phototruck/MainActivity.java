@@ -5,6 +5,8 @@ import android.app.WallpaperManager;
 import android.content.ClipData;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,6 +24,11 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import com.bignerdranch.android.phototruck.utility.ItemClickSupport;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,12 +37,16 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
+
     private RecyclerView rvGrid,rvCategory;
     private RecyclerView.LayoutManager mLayoutManager;
     private MainAdapter mAdapter;
     private WallpaperAdapter adapter;
     TextView tvRandom ;
     ImageView img;
+    ViewPagerAdapter mViewPagerAdapter;
+    private TabLayout mTabLayout;
+    private ViewPager mViewPager;
 
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
 
@@ -55,8 +66,17 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(),
+                MainActivity.this));
 
-        Log.d("bla-blah", "this is just a log");
+        // Give the TabLayout the ViewPager
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+
+    Log.d("bla-blah", "this is just a log");
         img=(ImageView) findViewById(R.id.iv_wallpaper);
 
         rvGrid = (RecyclerView) findViewById(R.id.rv_grid);
