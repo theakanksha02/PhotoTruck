@@ -17,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,9 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private WallpaperAdapter adapter;
     TextView tvRandom ;
     ImageView img;
-    ViewPagerAdapter mViewPagerAdapter;
-    private TabLayout mTabLayout;
-    private ViewPager mViewPager;
+
 
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
 
@@ -62,17 +62,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(),
-                MainActivity.this));
 
-        // Give the TabLayout the ViewPager
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
+
 
 
 

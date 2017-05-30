@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="155dp"
+    android:layout_height="75dp"
     android:gravity="center_vertical|center_horizontal"
     android:background="@drawable/catrgory_backgrounnd"
-    android:layout_marginLeft="4dp"
+    android:layout_marginLeft="6dp"
+              android:layout_marginTop="7dp"
+
     >
     <TextView
         android:id="@+id/title"
+
         android:paddingBottom="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +22,7 @@
         android:clipToPadding="false"
         android:gravity="center"
         tools:text="Nature"
-        android:textSize="16sp"
+        android:textSize="10sp"
         android:textColor="@android:color/white"
         />
 
