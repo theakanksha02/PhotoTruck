@@ -6,6 +6,7 @@ package com.bignerdranch.android.phototruck;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,9 @@ public class WallpaperAdapter extends RecyclerView.Adapter<WallpaperAdapter.Recy
             ivWallpaper = (ImageView) view.findViewById(R.id.iv_wallpaper);
         }
     }
+
+
+
 
     public WallpaperAdapter(List<Integer> wallList, Context c) {
         this.wallList = wallList;

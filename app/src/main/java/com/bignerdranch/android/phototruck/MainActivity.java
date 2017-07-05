@@ -3,13 +3,15 @@ package com.bignerdranch.android.phototruck;
 
 import android.app.WallpaperManager;
 import android.content.ClipData;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -17,8 +19,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +31,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-
+import android.support.v7.widget.RecyclerView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView img;
 
 
+
+
+
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
 
     ArrayList<String> mCategoryList;
@@ -62,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
         toolbar = (Toolbar) findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
@@ -70,10 +72,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
-
     Log.d("bla-blah", "this is just a log");
         img=(ImageView) findViewById(R.id.iv_wallpaper);
+
+
+
 
         rvGrid = (RecyclerView) findViewById(R.id.rv_grid);
         rvCategory = (RecyclerView) findViewById(R.id.rv_category);
@@ -106,14 +109,19 @@ public class MainActivity extends AppCompatActivity {
                 mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
 
                 rvGrid.setLayoutManager(mStaggeredGridLayoutManager);
+
                 rvGrid.setAdapter(adapter);
+
+
                 rvGrid.setHasFixedSize(false);
+                SpacesItemDecoration decoration = new SpacesItemDecoration(8);
+                rvGrid.addItemDecoration(decoration);
+
+
 
 
             }
         });
-
-
 
 
         mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
